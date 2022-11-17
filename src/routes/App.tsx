@@ -20,7 +20,7 @@ const AppRoutes = () => {
             cardStyle: {
                 backgroundColor: colors.white
             }
-        }} initialRouteName='Onboarding'>
+        }} initialRouteName='Account Setup'>
             <Screen name='Onboarding' component={Onboarding} />
             <Screen name='Auth' component={Auth} />
             <Screen name='Account Setup' component={AccountSetup} />

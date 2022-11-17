@@ -24,6 +24,7 @@ export const THEME = extendTheme({
         },
         white: '#FFFFFF',
         gray: {
+            50: '#fafafa',
             100: '#E6E6E6',
             200: '#CECECE',
             300: '#B5B5B5',
@@ -40,4 +41,7 @@ export const THEME = extendTheme({
         body: 'Urbanist_400Regular',
         mono: 'Urbanist_600SemiBold',
     },
+    sizes: {
+        14: 56
+    }
 })

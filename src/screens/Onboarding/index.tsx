@@ -1,4 +1,4 @@
-import { Text, View, VStack } from 'native-base';
+import { StatusBar, Text, View, VStack } from 'native-base';
 import React, { useRef, useState } from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { Button } from '../../components';

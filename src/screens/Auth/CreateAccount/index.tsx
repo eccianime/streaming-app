@@ -1,15 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { Checkbox, HStack, Icon, Text, theme, View, VStack } from 'native-base';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
-import { Button, Input, ClearButton, Screen } from '../../../components';
-import { AppNavigation } from '../../../types/navigation';
-import { Ionicons } from '@expo/vector-icons';
-import { THEME } from '../../../config/theme';
+
 import { AppleLogo, FacebookLogo, GoogleLogo, Logo } from '../../../assets/svg';
+import { Button, ClearButton, Input, Screen } from '../../../components';
+import { THEME } from '../../../config/theme';
+import { useAppNavigation } from '../../../types/navigation';
 
 const CreateAccount = () => {
-    const navigation = useNavigation<AppNavigation>();
+    const navigation = useAppNavigation();
     const { colors } = THEME;
     
     const createAccount = () => navigation.navigate('Account Setup', { screen: 'Choose Interest' })

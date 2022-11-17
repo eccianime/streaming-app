@@ -3,6 +3,7 @@ import { NavigationProp, NavigatorScreenParams, useNavigation } from "@react-nav
 // ========== Home ==========
 
 export type HomeNavigationParams = {
+    Base: undefined;
     'Top 10': undefined;
     'New Releases': undefined;
 }

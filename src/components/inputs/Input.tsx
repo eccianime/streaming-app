@@ -19,6 +19,7 @@ const Input = ({ label, viewStyle, ...props}: InputProps) => {
                     borderColor: colors.primary[600]
                 }}
                 bg='gray.50'
+                borderColor={'gray.100'}
                 size='lg'
                 fontFamily='body'
                 mb={'5'} 

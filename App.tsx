@@ -31,11 +31,10 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={THEME}>
-      <StatusBar barStyle='light-content' backgroundColor='transparent' translucent />
       {
         isAppReady ?
         <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
-            <StatusBar translucent barStyle='dark-content' />
+            <StatusBar translucent={false} barStyle='light-content' />
             <Routes />
         </View>
       : <Loading />
