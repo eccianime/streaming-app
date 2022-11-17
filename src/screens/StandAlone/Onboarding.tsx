@@ -1,4 +1,4 @@
-import { StatusBar, Text, View, VStack } from 'native-base';
+import { Text, View, VStack } from 'native-base';
 import React, { useRef, useState } from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { Button } from '../../components';
@@ -10,7 +10,7 @@ const Onboarding = () => {
       { title: 'Welcome to Mova', subtitle: 'The best movie streaming app of the century\nto make your days great' },
       { title: 'Welcome to Mova', subtitle: 'The best movie streaming app of the century\nto make your days great' },
   ]
-  const AppIntroSliderRef = useRef<AppIntroSlider>(null);
+  const AppIntroSliderRef = useRef<typeof AppIntroSlider>(null);
   const [currentScreen, setCurrentScreen] = useState<number>(0);
   const navigation = useAppNavigation();
   return (

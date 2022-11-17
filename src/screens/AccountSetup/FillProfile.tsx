@@ -1,9 +1,9 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { HStack, Icon, Text, View, VStack } from 'native-base';
 import React from 'react';
-import { UserImage } from '../../../assets/svg';
-import { Button, Input, Screen, SimpleHeader } from '../../../components';
-import { useAppNavigation } from '../../../types/navigation';
+import { UserImage } from '../../assets/svg';
+import { Button, Input, Screen, SimpleHeader } from '../../components';
+import { useAppNavigation } from '../../types/navigation';
 
 const FillProfile = () => {
     const navigation = useAppNavigation();

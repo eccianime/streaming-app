@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { HStack, Icon, Text, VStack } from 'native-base';
 import React from 'react';
-import { Button, Screen, SimpleHeader } from '../../../components';
-import { useAppNavigation } from '../../../types/navigation';
+import { Button, Screen, SimpleHeader } from '../../components';
+import { useAppNavigation } from '../../types/navigation';
 
 const SetFingerprint = () => {
   const navigation = useAppNavigation();

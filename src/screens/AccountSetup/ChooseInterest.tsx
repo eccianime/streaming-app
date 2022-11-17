@@ -1,8 +1,8 @@
 import { HStack, Pressable, Text, VStack } from 'native-base';
 import React, { useState } from 'react';
-import { Button, SimpleHeader } from '../../../components';
-import { THEME } from '../../../config/theme';
-import { useAppNavigation } from '../../../types/navigation';
+import { Button, SimpleHeader } from '../../components';
+import { THEME } from '../../config/theme';
+import { useAppNavigation } from '../../types/navigation';
 
 const ChooseInterest = () => {
   const navigation = useAppNavigation();
@@ -14,7 +14,7 @@ const ChooseInterest = () => {
     'Mystery', 'Fiction', 'Animation', 'War', 'History', 'Television',
     'Superheroes', 'Anime', 'Sports', 'K-Drama'
   ]
-  const { colors, sizes } = THEME;
+  const { colors } = THEME;
 
   const addRemoveGenre = (genre: string) => {
     const targetIndex = selectedGenres.findIndex( innerGenre => innerGenre === genre );

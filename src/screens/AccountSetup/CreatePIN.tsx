@@ -1,9 +1,8 @@
-import { HStack, Icon, IInputProps, Text, View, VStack } from 'native-base'
+import { HStack, IInputProps, Text, View, VStack } from 'native-base'
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native'
-import { Button, Input, Screen, SimpleHeader } from '../../../components'
-import { useAppNavigation } from '../../../types/navigation'
-import { FontAwesome } from '@expo/vector-icons';
+import { Button, Input, Screen, SimpleHeader } from '../../components'
+import { useAppNavigation } from '../../types/navigation'
 
 const { width } = Dimensions.get('screen');
 const inputSize = width / 4 - 20;

@@ -1,19 +1,19 @@
-import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { Checkbox, HStack, Icon, Text, theme, View, VStack } from 'native-base';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
+import { Button, Input, ClearButton, Screen } from '../../components';
+import { AppNavigation } from '../../types/navigation';
+import { Ionicons } from '@expo/vector-icons';
+import { THEME } from '../../config/theme';
+import { AppleLogo, FacebookLogo, GoogleLogo, Logo } from '../../assets/svg';
 
-import { AppleLogo, FacebookLogo, GoogleLogo, Logo } from '../../../assets/svg';
-import { Button, ClearButton, Input, Screen } from '../../../components';
-import { THEME } from '../../../config/theme';
-import { useAppNavigation } from '../../../types/navigation';
-
-const CreateAccount = () => {
-    const navigation = useAppNavigation();
+const Login = () => {
+    const navigation = useNavigation<AppNavigation>();
     const { colors } = THEME;
     
     const createAccount = () => navigation.navigate('Account Setup', { screen: 'Choose Interest' })
-    const navigateToSignIn = () => navigation.navigate('Auth', { screen: 'Login' })
+    const navigateToSignUp = () => navigation.navigate('Auth', { screen: 'Create Account' })
 
     const [isVisiblePassword, setVisiblePassword] = useState<boolean>(false);
     const [isRemembering, setRemember] = useState<boolean>(false);
@@ -21,6 +21,7 @@ const CreateAccount = () => {
     const navigateToFacebook = () => navigation.navigate('Auth', { screen: 'Login' })
     const navigateToGoogle = () => navigation.navigate('Auth', { screen: 'Login' })
     const navigateToApple = () => navigation.navigate('Auth', { screen: 'Login' })
+    const navigateToForgot = () => navigation.navigate('Auth', { screen: 'Forgot Password' })
     
     return (
         <Screen>
@@ -31,9 +32,9 @@ const CreateAccount = () => {
                 <Text
                   textAlign={'center'} 
                   color='gray.900' 
-                  fontSize='4xl' 
+                  fontSize='3xl' 
                   fontFamily='heading' 
-                  my={'6'}>{'Create your Account'}</Text>
+                  my={'6'}>{'Login to your account'}</Text>
                 
                 <Input
                     placeholder='Email'
@@ -65,11 +66,15 @@ const CreateAccount = () => {
                   onChange={(isSelected) => setRemember(isSelected)}>
                     <Text color='gray.900' fontFamily='heading' fontSize='sm'>Remember me</Text>
                 </Checkbox>
-                <Button onPress={createAccount} mb={'10'}>
-                    <Text color='white' fontFamily='heading' fontSize='lg'>Sign Up</Text>
+                <Button onPress={createAccount} mb={'4'}>
+                    <Text color='white' fontFamily='heading' fontSize='lg'>Sign In</Text>
                 </Button>
+
+                <Pressable onPress={navigateToForgot}>
+                    <Text textAlign='center' fontFamily='mono' color='primary.500' fontSize='md'>Forgot the password?</Text>
+                </Pressable>
                 
-                <HStack alignItems='center' mb={'7'}>
+                <HStack alignItems='center' mt={'6'} mb={'7'}>
                     <View h={'0.5'} flex={1} bg='gray.100' />
                     <Text mx='5' color='gray.600' fontFamily='mono' fontSize='lg'>or continue with</Text>
                     <View h={'0.5'} flex={1} bg='gray.100' />
@@ -87,12 +92,12 @@ const CreateAccount = () => {
                     </ClearButton>
                 </HStack>
 
-                <Pressable onPress={navigateToSignIn}>
-                    <Text textAlign='center' color='gray.300' fontFamily='body' fontSize='md'>Already have an account? <Text fontFamily='heading' color='primary.500'>Sign in</Text></Text>
+                <Pressable onPress={navigateToSignUp}>
+                    <Text textAlign='center' color='gray.300' fontFamily='body' fontSize='md'>{"Don't have an account?"} <Text fontFamily='heading' color='primary.500'>Sign up</Text></Text>
                 </Pressable>
             </VStack>
         </Screen>
     );
 }
 
-export default CreateAccount;
+export default Login;

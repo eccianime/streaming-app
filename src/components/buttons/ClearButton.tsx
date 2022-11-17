@@ -7,7 +7,7 @@ const ClearButton = ({ children, ...props }: { children: ReactElement } & IButto
         <Button 
             borderColor='gray.100'
             borderWidth='1'
-            mb={5}
+            mb={4}
             shadow='none'
             w='full' 
             bg='white' 
