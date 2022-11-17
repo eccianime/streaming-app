@@ -2,33 +2,59 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { AccountNavigationParams } from '../types/navigation';
 import { Home, Explore, MyList, Download, Profile } from '../screens/Account'
+import { THEME } from '../config/theme';
+import { BookmarkIcon, CompassIcon, DownloadIcon, HomeIcon, UserIcon } from '../assets/svg';
+import { SvgProps } from 'react-native-svg';
+import { Text, View } from 'native-base';
+import { Dimensions } from 'react-native';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator<AccountNavigationParams>();
+const { width } = Dimensions.get('screen');
 
 const AccountRoutes = () => {
-//   const getIconFromName = ( name: string, focused: boolean ) => {
-//     let Icon: React.FC<SvgProps>
-//     switch(name){
-//       case 'Home': Icon = HomeIcon; break;
-//       case 'Lives': Icon = Sensors; break;
-//       case 'Notes': Icon = Description; break;
-//       case 'Search': Icon = SearchIcon; break;
-//       default: Icon = Help; break;
-//     }
-//     return <Icon height={24} width={24} color={focused ? colors.primaryColor[1100] : colors.textColor[100]} />
-//   }
-//   const getLabelFromName = (name: string, focused: boolean) => {
-    // let label = '';
-    // switch(name){
-    //   case 'Home': label = 'Início'; break;
-    //   case 'Lives': label = 'Ao vivo'; break;
-    //   case 'Notes': label = 'Cadernos'; break;
-    //   case 'Search': label = 'Pesquisar'; break;
-    // }
-//     return <TabLabel focused={focused} width={width / 4}>{label}</TabLabel>
-//   }
+  const { colors } = THEME;
+  const getLabelFromName = (name: string, focused: boolean) => {
+    let Icon: React.FC<SvgProps>;
+    switch(name){
+      case 'Home': 
+        Icon = HomeIcon; break;
+      case 'Explore': 
+        Icon = CompassIcon; break;
+      case 'My List': 
+        Icon = BookmarkIcon; break;
+      case 'Download': 
+        Icon = DownloadIcon; break;
+      case 'Profile': 
+        Icon = UserIcon; break;
+      default: Icon = UserIcon; break;
+    }
+    return (
+      <View w={width / 5} justifyContent='center'>
+        <Icon 
+          height={24} 
+          width={width / 5} 
+          color={focused ? colors.primary[500] : colors.gray[400]} />
+        <Text
+          size={'12'}
+          width={width / 5} 
+          textAlign='center'
+          fontFamily={focused ? 'mono' : 'body'}
+          color={focused ? 'primary.500' : 'gray.300'}>{name}</Text>
+      </View>
+    )
+  }
   return (
-    <Navigator tabBarPosition='bottom'>
+    <Navigator
+      tabBarPosition='bottom'
+      screenOptions={({ route }) => ({
+        tabBarIndicator: () => null,
+        tabBarShowIcon: false,
+        tabBarLabel: ({ focused }) => getLabelFromName( route.name, focused ),
+        tabBarStyle: {
+          height: 70,
+        }
+      })}
+      >
         <Screen name="Home" component={Home} />
         <Screen name="Explore" component={Explore} />
         <Screen name="My List" component={MyList} />
