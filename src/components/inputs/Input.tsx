@@ -8,7 +8,7 @@ const Input = ({ label, viewStyle, ...props}: InputProps) => {
     return (
         <View style={viewStyle}>
             {
-                !!label && <Text fontFamily='heading' color='black.900' fontSize='md' mb='4'>{label}</Text>
+                !!label && <Text fontFamily='heading' color='gray.900' fontSize='md' mb='4'>{label}</Text>
             }
             <NBInput
                 h='12'

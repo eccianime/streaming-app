@@ -19,10 +19,10 @@ const SimpleHeader = ({ title, hasBackButton = true }: SimpleHeaderProps) => {
             {
                 hasBackButton &&
                 <Pressable onPress={handleGoBack} mr={2}>
-                    <Icon as={<Ionicons name='arrow-back-outline' />} size={'2xl'} color='gray.900' />
+                    <Icon as={<Ionicons name='arrow-back-outline' />} size={'xl'} color='gray.900' />
                 </Pressable>
             }
-            <Text fontFamily='heading' fontSize='2xl' color='gray.900'>{title}</Text>
+            <Text fontFamily='heading' fontSize='xl' color='gray.900'>{title}</Text>
         </HStack>
     )
 }

@@ -1,5 +1,5 @@
 import { IInputProps } from 'native-base';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
 
 export type InputProps =  IInputProps & {
     label?: string;
@@ -9,4 +9,14 @@ export type InputProps =  IInputProps & {
 export type SimpleHeaderProps = {
     title: string;
     hasBackButton?: boolean | (() => void);
+}
+
+export type MovieProps = {
+    imageUrl: ImageSourcePropType,
+    rating: number;
+}
+
+export type MovieHListProps = {
+    movies: MovieProps[];
+    title: string;
 }

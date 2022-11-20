@@ -1,12 +1,5 @@
 import { NavigationProp, NavigatorScreenParams, useNavigation } from "@react-navigation/native";
-
-// ========== Home ==========
-
-export type HomeNavigationParams = {
-    Base: undefined;
-    'Top 10': undefined;
-    'New Releases': undefined;
-}
+import { MovieProps } from './components';
 
 // ========== Home ==========
 
@@ -27,7 +20,7 @@ export type ProfileNavigationParams = {
 // ========== Account ==========
 
 export type AccountNavigationParams = {
-    Home: NavigatorScreenParams<HomeNavigationParams>;
+    Home: undefined;
     Explore: undefined;
     'My List': undefined;
     Download: undefined;
@@ -59,7 +52,8 @@ export type AccountSetupNavigationParams = {
 // ========== Movie Details ==========
 
 export type MovieNavigationParams = {
-    Details: undefined;
+    'List Details': { movies: MovieProps[], title: string };
+    Details: { movie: MovieProps };
     'Comment List': undefined;
     Player: undefined;
 }

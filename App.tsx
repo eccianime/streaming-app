@@ -3,7 +3,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NativeBaseProvider, StatusBar, View } from 'native-base';
 import React, { useCallback, useEffect, useState } from 'react';
-import Loading from './src/components/Loading';
+import { Loading } from './src/components';
 import { THEME } from './src/config/theme';
 import Routes from './src/routes';
 

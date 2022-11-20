@@ -10,3 +10,6 @@ export { default as HomeIcon } from './home.svg';
 export { default as DownloadIcon } from './download.svg';
 export { default as BookmarkIcon } from './bookmark.svg';
 export { default as CompassIcon } from './compass.svg';
+
+export { default as BellIcon } from './bell.svg';
+export { default as SearchIcon } from './search.svg';

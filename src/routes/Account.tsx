@@ -1,12 +1,13 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { AccountNavigationParams } from '../types/navigation';
+import { SvgProps } from 'react-native-svg';
+import { Dimensions } from 'react-native';
+import { Text, View } from 'native-base';
+
 import { Home, Explore, MyList, Download, Profile } from '../screens/Account'
 import { THEME } from '../config/theme';
 import { BookmarkIcon, CompassIcon, DownloadIcon, HomeIcon, UserIcon } from '../assets/svg';
-import { SvgProps } from 'react-native-svg';
-import { Text, View } from 'native-base';
-import { Dimensions } from 'react-native';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator<AccountNavigationParams>();
 const { width } = Dimensions.get('screen');
@@ -47,6 +48,7 @@ const AccountRoutes = () => {
     <Navigator
       tabBarPosition='bottom'
       screenOptions={({ route }) => ({
+        swipeEnabled: false,
         tabBarIndicator: () => null,
         tabBarShowIcon: false,
         tabBarLabel: ({ focused }) => getLabelFromName( route.name, focused ),

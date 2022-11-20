@@ -34,7 +34,9 @@ export const THEME = extendTheme({
             700: '#525252',
             800: '#3A3A3A',
             900: '#212121'
-        }
+        },
+        transparent: 'rgba(0,0,0,0)',
+        backdrop: 'rgba(0,0,0,.5)',
     },
     fonts: {
         heading: 'Urbanist_700Bold',
@@ -42,6 +44,10 @@ export const THEME = extendTheme({
         mono: 'Urbanist_600SemiBold',
     },
     sizes: {
-        14: 56
+        14: 56,
+        22: 88,
+        26: 104,
+        28: 112,
+        36: 144,
     }
 })
