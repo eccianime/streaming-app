@@ -24,7 +24,7 @@ const ChooseInterest = () => {
       setSelectedGenres([...selectedGenres, genre])
     }
   }
-  const navigateToHome = () => navigation.navigate('Account', { screen: 'Home', params: { screen: 'Base' } })
+  const navigateToHome = () => navigation.navigate('Account', { screen: 'Home' })
   const navigateToFillProfile = () => navigation.navigate('Account Setup', { screen: 'Fill Profile' });
   const navigateToLogin = () => navigation.navigate('Auth', { screen: 'Login' })
   return (

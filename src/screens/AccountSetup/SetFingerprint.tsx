@@ -6,7 +6,7 @@ import { useAppNavigation } from '../../types/navigation';
 
 const SetFingerprint = () => {
   const navigation = useAppNavigation();
-  const navigateToAccount = () => navigation.navigate('Account', { screen: 'Home', params: { screen: 'Base' } })
+  const navigateToAccount = () => navigation.navigate('Account', { screen: 'Home' })
   const handleShowModal = () => {
     navigateToAccount()
   }

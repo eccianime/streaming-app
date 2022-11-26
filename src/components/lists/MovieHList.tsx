@@ -1,15 +1,14 @@
-import { HStack, Image, Pressable, ScrollView, Text, VStack, Button } from 'native-base'
+import { Button, HStack, ScrollView, Text, View, VStack } from 'native-base'
 import React from 'react'
 import { THEME } from '../../config/theme'
 import { MovieHListProps } from '../../types/components'
-import { useAppNavigation } from '../../types/navigation'
+import Movie from '../common/Movie'
 
-const MovieHList = ({ movies, title }: MovieHListProps) => {
+const MovieHList = ({ movies, title, goToDetails }: MovieHListProps) => {
     const { colors } = THEME;
-    const navigation = useAppNavigation();
 
     const navigateToListDetails = () => {
-        navigation.navigate('Movie', { screen: 'List Details', params: { movies, title }})
+        goToDetails(title);
     }
     return (
         <VStack bg={'white'} flex={1} pt={5}>
@@ -33,18 +32,9 @@ const MovieHList = ({ movies, title }: MovieHListProps) => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {
                 movies.map( (movie, index) => (
-                    <Pressable 
-                        onPress={() => {
-                            navigation.navigate('Movie', { screen: 'Details', params: { movie } })
-                        }}
-                        android_ripple={{ foreground: true, color: colors.black }}
-                        _pressed={{
-                            bg: colors.backdrop
-                        }} 
-                        key={Math.random()} 
-                        mr='2' ml={!index ? 5 : 0 }>
-                        <Image source={movie.imageUrl} w={36} h={48} alt='movie' borderRadius={'xl'} />
-                    </Pressable>
+                    <View key={movie.id} mr='2' ml={!index ? 5 : 0 }>
+                        <Movie data={movie} />
+                    </View>
                 ) )
                 }
             </ScrollView>

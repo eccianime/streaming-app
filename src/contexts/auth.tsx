@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { AuthContextProps, AuthProviderProps, UserProps } from '../types/context';
+import { AuthContextProps, ProviderProps, UserProps } from '../types/context';
 // import * as AuthSession from 'expo-auth-session';
 // import * as WebBroser from 'expo-web-browser';
 // import * as Google from 'expo-auth-session/providers/google'
@@ -8,13 +8,7 @@ import { AuthContextProps, AuthProviderProps, UserProps } from '../types/context
 
 const AuthContext = createContext({} as AuthContextProps);
 
-const AuthProvider = ({ children }: AuthProviderProps) => {
-    // const [ request, response, promptAsync ] = Google.useAuthRequest({
-    //     clientId: '104388373474-di84679dehgiac0d7fak84dre3uamd5b.apps.googleusercontent.com',
-    //     redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
-    //     scopes: ['profile', 'email']
-        
-    // })
+const AuthProvider = ({ children }: ProviderProps) => {
     const [ isUserLoading, setUserLoading ] = useState(false);
     const [user, setUser] = useState({} as UserProps)
 

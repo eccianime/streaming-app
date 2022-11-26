@@ -7,7 +7,7 @@ import { useAppNavigation } from '../../types/navigation';
 
 const FillProfile = () => {
     const navigation = useAppNavigation();
-    const navigateToAccount = () => navigation.navigate('Account', { screen: 'Home', params: { screen: 'Base' } })
+    const navigateToAccount = () => navigation.navigate('Account', { screen: 'Home' })
     const navigateToCreatePIN  = () => navigation.navigate('Account Setup', { screen: 'Create PIN' })
     return (
         <Screen>

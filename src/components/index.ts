@@ -5,4 +5,5 @@ export { default as SimpleHeader } from './common/SimpleHeader'
 export { default as Loading } from './common/Loading'
 export { default as Input } from './inputs/Input'
 export { default as MovieHList } from './lists/MovieHList'
+export { default as Movie } from './common/Movie'
 
