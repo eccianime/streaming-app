@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { GenreProps, MovieProps } from './components';
+import { GenreProps, MovieProps, MoviePropsExtended } from './components';
+import { PersonProps } from './dto';
 
 export type UserProps = {
     name: string;
@@ -13,16 +14,23 @@ export type ProviderProps = {
 export type AuthContextProps = {
     user: UserProps;
     signIn: () => Promise<void>;
-    isUserLoading: boolean;
 }
 
 export type HomeContextProps = {
+    genres: GenreProps[];
     latestMovie?: MovieProps;
     popularMovies: MovieProps[];
     topRatedMovies: MovieProps[];
 }
 
 export type AppContextProps = {
-    genres: GenreProps[];
-    attachGenreName: (movies: MovieProps[]) => MovieProps[]
+    isLoading: boolean;
+    setLoading: (isLoading: boolean) => void;
+}
+
+export type MovieContextProps = {
+    getMovieDetails: (movie_id: string) => Promise<void>;
+    currentMovie: MoviePropsExtended | undefined;
+    backdropImage: string;
+    credits: PersonProps[];
 }

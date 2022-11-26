@@ -2,21 +2,18 @@ import { HStack, Pressable, Text, VStack } from 'native-base';
 import React, { useState } from 'react';
 import { Button, SimpleHeader } from '../../components';
 import { THEME } from '../../config/theme';
+import { useHomeContext } from '../../contexts/home';
+import { GenreProps } from '../../types/components';
 import { useAppNavigation } from '../../types/navigation';
 
 const ChooseInterest = () => {
   const navigation = useAppNavigation();
+  const { genres } = useHomeContext();
   
-  const [ selectedGenres, setSelectedGenres ] = useState<string[]>([]);
-  const genres = [
-    'Action', 'Drama', 'Comedy', 'Horror', 'Adventure', 'Thriller', 
-    'Romance', 'Science', 'Music', 'Documentary', 'Crime', 'Fantasy',
-    'Mystery', 'Fiction', 'Animation', 'War', 'History', 'Television',
-    'Superheroes', 'Anime', 'Sports', 'K-Drama'
-  ]
+  const [ selectedGenres, setSelectedGenres ] = useState<GenreProps[]>([]);
   const { colors } = THEME;
 
-  const addRemoveGenre = (genre: string) => {
+  const addRemoveGenre = (genre: GenreProps) => {
     const targetIndex = selectedGenres.findIndex( innerGenre => innerGenre === genre );
     if( targetIndex > -1 ){
       setSelectedGenres(selectedGenres.filter( innerGenre => innerGenre !== genre ))
@@ -55,7 +52,7 @@ const ChooseInterest = () => {
                 fontFamily='mono'
                 fontSize={'18'}
                 color={selectedGenres.some( innerGenre => innerGenre === genre ) ? 'white' : 'primary.500'}
-              >{genre}</Text>
+              >{genre.name}</Text>
             </Pressable>
           ) )
         }

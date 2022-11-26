@@ -14,14 +14,14 @@ const ListDetails = ({ route }: ListDetailsProps) => {
   const imageWidth = width / 2 - 25;
   const imageHeight = imageWidth * 4/3
   return (
-    <VStack flexGrow={1} px={5} pt={5}>
-      <SimpleHeader title={title} hasBackButton />
+    <VStack flexGrow={1} pt={5}>
+      <SimpleHeader title={title} hasBackButton px={5} />
       <ScrollView flex={1} showsVerticalScrollIndicator={false} contentContainerStyle={{
-        flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingBottom: space[4]
+        flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingBottom: space[5], paddingHorizontal: space[5]
       }}>
       {
         movies.map( (movie) => (
-          <View mb={2} key={movie.id} >
+          <View mb={2} key={movie.id}>
             <Movie data={movie} w={imageWidth} h={imageHeight} />
           </View>
         ) )

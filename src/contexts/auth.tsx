@@ -9,7 +9,6 @@ import { AuthContextProps, ProviderProps, UserProps } from '../types/context';
 const AuthContext = createContext({} as AuthContextProps);
 
 const AuthProvider = ({ children }: ProviderProps) => {
-    const [ isUserLoading, setUserLoading ] = useState(false);
     const [user, setUser] = useState({} as UserProps)
 
     const signIn = async () => {
@@ -36,7 +35,7 @@ const AuthProvider = ({ children }: ProviderProps) => {
     
     return (
         <AuthContext.Provider value={{
-            signIn, user, isUserLoading
+            signIn, user,
         }}>
             {children}
         </AuthContext.Provider>

@@ -13,3 +13,7 @@ export { default as CompassIcon } from './compass.svg';
 
 export { default as BellIcon } from './bell.svg';
 export { default as SearchIcon } from './search.svg';
+
+export { default as DownloadFillIcon } from './download-fill.svg';
+export { default as PlayIcon } from './play.svg';
+export { default as SendIcon } from './send.svg';

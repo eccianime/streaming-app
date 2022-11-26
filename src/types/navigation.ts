@@ -53,7 +53,7 @@ export type AccountSetupNavigationParams = {
 
 export type MovieNavigationParams = {
     'List Details': { movies: MovieProps[], title: string };
-    Details: { movie: MovieProps };
+    Details: undefined;
     'Comment List': undefined;
     Player: undefined;
 }

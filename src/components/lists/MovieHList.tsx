@@ -11,8 +11,8 @@ const MovieHList = ({ movies, title, goToDetails }: MovieHListProps) => {
         goToDetails(title);
     }
     return (
-        <VStack bg={'white'} flex={1} pt={5}>
-            <HStack px={5} pb={5} justifyContent={'space-between'} alignItems='center'>
+        <VStack bg={'white'} flex={1} pt={3}>
+            <HStack px={5} pb={3} justifyContent={'space-between'} alignItems='center'>
                 <Text
                     color={'gray.900'}
                     fontFamily='heading'
@@ -32,7 +32,7 @@ const MovieHList = ({ movies, title, goToDetails }: MovieHListProps) => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {
                 movies.map( (movie, index) => (
-                    <View key={movie.id} mr='2' ml={!index ? 5 : 0 }>
+                    <View key={movie.id} mr={2} ml={!index ? 5 : 0 }>
                         <Movie data={movie} />
                     </View>
                 ) )

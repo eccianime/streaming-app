@@ -34,7 +34,7 @@ export default function App() {
       {
         isAppReady ?
         <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
-            <StatusBar translucent={false} barStyle='light-content' />
+            <StatusBar backgroundColor={'transparent'} translucent barStyle='light-content' />
             <Routes />
         </View>
       : <Loading />

@@ -16,7 +16,7 @@ const Input = ({ label, viewStyle, ...props}: InputProps) => {
                 borderWidth='0'
                 _focus={{
                     borderWidth: 1,
-                    borderColor: colors.primary[600]
+                    borderColor: colors.primary[500]
                 }}
                 bg='gray.50'
                 borderColor={'gray.100'}

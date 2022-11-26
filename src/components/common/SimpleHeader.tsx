@@ -4,7 +4,7 @@ import { SimpleHeaderProps } from '../../types/components'
 import { useAppNavigation } from '../../types/navigation'
 import { Ionicons } from '@expo/vector-icons';
 
-const SimpleHeader = ({ title, hasBackButton = true }: SimpleHeaderProps) => {
+const SimpleHeader = ({ title, hasBackButton = true, ...rest }: SimpleHeaderProps) => {
     const navigation = useAppNavigation();
     const handleGoBack = () => {
         if( hasBackButton && typeof hasBackButton === 'boolean' ){
@@ -15,7 +15,7 @@ const SimpleHeader = ({ title, hasBackButton = true }: SimpleHeaderProps) => {
          
     }
     return (
-        <HStack alignItems={'center'} mb={6}>
+        <HStack alignItems={'center'} mb={6} {...rest}>
             {
                 hasBackButton &&
                 <Pressable onPress={handleGoBack} mr={2}>

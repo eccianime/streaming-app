@@ -2,34 +2,36 @@ import { Center, Image, Pressable, Text } from 'native-base';
 import React from 'react';
 import { Logo } from '../../assets/svg';
 import { THEME } from '../../config/theme';
+import { useMovieContext } from '../../contexts/movie';
 import { IMAGE_BASE_URL } from '../../services/tmdb';
 import { MovieItemProps } from '../../types/components';
 import { useAppNavigation } from '../../types/navigation';
 
 const Movie = ({ data, h, w }: MovieItemProps) => {
+    const { getMovieDetails } = useMovieContext();
     const { colors } = THEME;
     const navigation = useAppNavigation();
     return (
         <Pressable
             w={w || 36} h={h || 48}
-            onPress={() => {
-                navigation.navigate('Movie', { screen: 'Details', params: { movie: data } })
+            onPress={ async () => {
+                await getMovieDetails(data.id.toString())
+                navigation.navigate('Movie', { screen: 'Details' })
             }}
             android_ripple={{ foreground: true, color: colors.black }}
             _pressed={{
                 bg: colors.backdrop
             }}>
             {
-                !!data?.backdrop_path ?
+                !!data?.poster_path ?
                 <Image
-                    source={{ uri: IMAGE_BASE_URL + data.backdrop_path }}
-                    shadow={9}
+                    source={{ uri: IMAGE_BASE_URL + data.poster_path }}
                     w={w || 36} 
                     h={h || 48} 
                     alt='movie' 
                     borderRadius={'xl'}
                 /> :
-                <Center w={w || 36} h={h || 48} bg={'white'} shadow={9} borderRadius={'xl'}>
+                <Center w={w || 36} h={h || 48} borderRadius={'xl'}>
                     <Logo width={100} height={100} />
                 </Center>
             }
