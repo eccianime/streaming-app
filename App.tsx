@@ -1,3 +1,6 @@
+import 'intl';
+import 'intl/locale-data/jsonp/en';
+
 import { Urbanist_300Light, Urbanist_400Regular, Urbanist_600SemiBold, Urbanist_700Bold, Urbanist_800ExtraBold } from '@expo-google-fonts/urbanist';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';

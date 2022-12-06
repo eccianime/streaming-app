@@ -1,7 +1,7 @@
 import { IInputProps } from 'native-base';
 import { IViewProps } from 'native-base/lib/typescript/components/basic/View/types';
 import { StyleProp, ViewStyle } from 'react-native';
-import { ImageResultProps } from './dto';
+import { ImageResultProps, VideoResultProps } from './dto';
 
 export type InputProps =  IInputProps & {
     label?: string;
@@ -44,6 +44,7 @@ export type MoviePropsExtended = MovieProps & {
     status: 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled';
     tagline: string;
     images: ImageResultProps;
+    videos: VideoResultProps;
 }
 
 export type ProducerProps = {
@@ -73,4 +74,21 @@ export type MovieHListProps = {
 export type LanguageProps = {
     iso_639_1: string;
     name: string;
+}
+
+export type ReviewerProps = {
+    avatar_path: string;
+    name: string;
+    rating: number; 
+    username: string;
+}
+
+export type ReviewProps = {
+    author: string;
+    author_details: ReviewerProps;
+    content: string;
+    created_at: string;
+    id: string;
+    updated_at: string;
+    url: string;
 }

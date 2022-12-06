@@ -15,6 +15,23 @@ export type ImageResultProps = {
     posters: ImageProps[];
 }
 
+export type VideoProps = {
+    id: string;
+    iso_3166_1: string;
+    iso_639_1: string;
+    key: string;
+    name: string;
+    official: boolean, 
+    published_at: string;
+    site: string;
+    size: number, 
+    type: string;
+}
+
+export type VideoResultProps = {
+    results: VideoProps[]
+}
+
 export type PersonProps = {
     adult: boolean;
     gender: number;
