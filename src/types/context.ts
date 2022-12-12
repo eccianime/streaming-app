@@ -3,34 +3,33 @@ import { GenreProps, MovieProps, MoviePropsExtended } from './components';
 import { PersonProps } from './dto';
 
 export type UserProps = {
-    name: string;
-    avatarUrl: string;
-}
+  name: string;
+  avatarUrl: string;
+};
 
 export type ProviderProps = {
-    children: ReactNode;
-}
+  children: ReactNode;
+};
 
 export type AuthContextProps = {
-    user: UserProps;
-    signIn: () => Promise<void>;
-}
+  user: UserProps;
+  signIn: () => Promise<void>;
+};
 
 export type HomeContextProps = {
-    genres: GenreProps[];
-    latestMovie?: MovieProps;
-    popularMovies: MovieProps[];
-    topRatedMovies: MovieProps[];
-}
+  genres: GenreProps[];
+  latestMovie?: MovieProps;
+  popularMovies: MovieProps[];
+  topRatedMovies: MovieProps[];
+};
 
 export type AppContextProps = {
-    isLoading: boolean;
-    setLoading: (isLoading: boolean) => void;
-}
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
 
 export type MovieContextProps = {
-    getMovieDetails: (movie_id: string) => Promise<void>;
-    currentMovie: MoviePropsExtended | undefined;
-    backdropImage: string;
-    credits: PersonProps[];
-}
+  getMovieDetails: (movie_id: string) => Promise<MoviePropsExtended>;
+  backdropImage: string;
+  credits: PersonProps[];
+};
