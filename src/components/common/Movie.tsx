@@ -16,10 +16,7 @@ const Movie = ({ data, h, w }: MovieItemProps) => {
 
   const handleGetMovieDetails = async () => {
     setLoading(true);
-
-    setLoading(true);
     const detailsResult = await getFromMovies(`${data.id}?append_to_response=images,credits`);
-
     const targetImage = (detailsResult.images as ImageResultProps).backdrops.find(
       (image) => image.iso_639_1 === 'en'
     )?.file_path;

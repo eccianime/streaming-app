@@ -2,12 +2,14 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { Center, HStack, Icon, IconButton, Text } from 'native-base';
 import React from 'react';
 
-import { BookmarkIcon, SendIcon } from '../../../assets/svg';
+import { BookmarkFillIcon, BookmarkIcon, SendIcon } from '../../../assets/svg';
 import { THEME } from '../../../config/theme';
+import { useMyListContext } from '../../../contexts/myList';
 import { MoviePropsExtended } from '../../../types/components';
 
 const BasicInfo = ({ movie }: { movie: MoviePropsExtended }) => {
   const { colors } = THEME;
+  const { myList, addOrRemoveFromMyList } = useMyListContext();
   return (
     <>
       <HStack alignItems={'center'} justifyContent="space-between" mb={2}>
@@ -22,7 +24,16 @@ const BasicInfo = ({ movie }: { movie: MoviePropsExtended }) => {
         </Text>
         <HStack>
           <IconButton
-            icon={<BookmarkIcon width={20} height={20} color={colors.gray[900]} />}
+            onPress={async () => {
+              await addOrRemoveFromMyList(movie);
+            }}
+            icon={
+              myList.some((item) => item.id === movie.id) ? (
+                <BookmarkFillIcon width={20} height={20} color={colors.primary[500]} />
+              ) : (
+                <BookmarkIcon width={20} height={20} color={colors.gray[900]} />
+              )
+            }
             borderRadius="full"
           />
           <IconButton

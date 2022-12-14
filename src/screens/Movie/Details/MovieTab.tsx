@@ -2,7 +2,7 @@ import { HStack, Pressable, Text, VStack } from 'native-base';
 import { useState } from 'react';
 import { THEME } from '../../../config/theme';
 import { MoviePropsExtended } from '../../../types/components';
-import { Comments, MoreLikeThis, Trailers } from './TabBar';
+import { Comments, MoreLikeThis, Trailers } from './Tabs';
 
 const MovieTab = ({ movie }: { movie: MoviePropsExtended }) => {
   const { colors } = THEME;

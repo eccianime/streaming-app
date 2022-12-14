@@ -33,3 +33,8 @@ export type MovieContextProps = {
   backdropImage: string;
   credits: PersonProps[];
 };
+
+export type MyListContextProps = {
+  myList: MoviePropsExtended[];
+  addOrRemoveFromMyList: (movie: MoviePropsExtended) => Promise<void>;
+};

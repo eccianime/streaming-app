@@ -5,7 +5,7 @@ import { PersonProps } from './dto';
 // ========== Home ==========
 
 export type ProfileNavigationParams = {
-  Base: undefined;
+  'Option List': undefined;
   Subscribe: undefined;
   Payment: undefined;
   'Card Details': undefined;

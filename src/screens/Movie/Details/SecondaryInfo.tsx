@@ -32,6 +32,7 @@ const SecondaryInfo = ({
       <Text
         numberOfLines={numOfLines == 0 ? undefined : loadMore ? numOfLines : NUM_OF_LINES}
         onTextLayout={onTextLayout}
+        textAlign="justify"
         color={'gray.900'}
         fontFamily="body"
         fontSize={'sm'}
