@@ -9,14 +9,14 @@ import { MovieItemProps } from '../../types/components';
 import { CreditResultProps, ImageResultProps } from '../../types/dto';
 import { useAppNavigation } from '../../types/navigation';
 
-const Movie = ({ data, h, w, isSeries }: MovieItemProps) => {
+const Movie = ({ data, h, w }: MovieItemProps) => {
   const { setLoading } = useAppContext();
   const { colors } = THEME;
   const navigation = useAppNavigation();
 
   const handleGetMovieDetails = async () => {
     setLoading(true);
-    const detailsResult = isSeries
+    const detailsResult = Boolean(data?.first_air_date)
       ? await getFromSeries(`${data.id}?append_to_response=images,credits`)
       : await getFromMovies(`${data.id}?append_to_response=images,credits`);
     const targetImage = (detailsResult.images as ImageResultProps).backdrops.find(

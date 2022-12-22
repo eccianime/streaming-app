@@ -17,4 +17,5 @@ export const getFromSearch = async (type: string, target: string) =>
   await axios_request(`/search/${type}?query=${encodeURI(target)}`);
 
 // GENRES
-export const getGenres = async () => await axios_request('/genre/movie/list');
+export const getGenres = async (target: 'movie' | 'tv') =>
+  await axios_request(`/genre/${target}/list`);

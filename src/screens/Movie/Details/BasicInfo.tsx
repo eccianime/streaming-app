@@ -20,7 +20,7 @@ const BasicInfo = ({ movie }: { movie: MoviePropsExtended }) => {
           fontSize="2xl"
           fontFamily={'heading'}
         >
-          {movie?.title}
+          {movie?.title || movie?.name}
         </Text>
         <HStack>
           <IconButton

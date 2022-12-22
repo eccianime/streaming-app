@@ -19,27 +19,30 @@ const HomeProvider = ({ children }: ProviderProps) => {
   const getHomeInfo = async () => {
     setLoading(true);
     const [
-      genresResult,
+      movieGenreResult,
+      tvGenreResult,
       popularMovies,
       popularSeries,
       topRatedMovies,
       topRatedSeries,
       latestMovie,
     ] = await Promise.all([
-      getGenres(),
+      getGenres('movie'),
+      getGenres('tv'),
       getFromMovies('popular'),
       getFromSeries('popular'),
       getFromMovies('top_rated'),
       getFromSeries('top_rated'),
       getFromMovies('now_playing'),
     ]);
+    const genresResult = [...movieGenreResult.genres, ...tvGenreResult.genres];
     setLoading(false);
-    setGenres(genresResult.genres as GenreProps[]);
-    setPopularMovies(attachGenreName(popularMovies.results, genresResult.genres) as MovieProps[]);
-    setPopularSeries(attachGenreName(popularSeries.results, genresResult.genres) as MovieProps[]);
-    setTopRatedMovies(attachGenreName(topRatedMovies.results, genresResult.genres) as MovieProps[]);
-    setTopRatedSeries(attachGenreName(topRatedSeries.results, genresResult.genres) as MovieProps[]);
-    setLatestMovie(attachGenreName(latestMovie.results, genresResult.genres)[0] as MovieProps);
+    setGenres(genresResult as GenreProps[]);
+    setPopularMovies(attachGenreName(popularMovies.results, genresResult) as MovieProps[]);
+    setPopularSeries(attachGenreName(popularSeries.results, genresResult) as MovieProps[]);
+    setTopRatedMovies(attachGenreName(topRatedMovies.results, genresResult) as MovieProps[]);
+    setTopRatedSeries(attachGenreName(topRatedSeries.results, genresResult) as MovieProps[]);
+    setLatestMovie(attachGenreName(latestMovie.results, genresResult)[0] as MovieProps);
   };
 
   const attachGenreName = (movies: MovieProps[], genres: GenreProps[]) => {

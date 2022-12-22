@@ -41,7 +41,12 @@ const MyList = () => {
           <HStack flexWrap={'wrap'} justifyContent="space-between">
             {myList.map((movie) => (
               <View mb={2} key={movie.id}>
-                <Movie data={movie} w={imageWidth} h={imageHeight} />
+                <Movie
+                  data={movie}
+                  w={imageWidth}
+                  h={imageHeight}
+                  isSeries={Boolean(movie?.number_of_episodes)}
+                />
               </View>
             ))}
           </HStack>

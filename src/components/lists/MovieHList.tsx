@@ -31,7 +31,7 @@ const MovieHList = ({ movies, title, goToDetails, isSeries }: MovieHListProps) =
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {movies.map((movie, index) => (
           <View key={movie.id} mr={2} ml={!index ? 5 : 0}>
-            <Movie data={movie} isSeries />
+            <Movie data={movie} isSeries={isSeries} />
           </View>
         ))}
       </ScrollView>

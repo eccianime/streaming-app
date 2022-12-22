@@ -1,4 +1,12 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  DocumentData,
+  getDoc,
+  getDocs,
+  setDoc,
+} from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { database } from '../config/firebaseConfig';
 import { MoviePropsExtended } from '../types/components';
@@ -14,41 +22,35 @@ const MyListProvider = ({ children }: ProviderProps) => {
   const { setLoading } = useAppContext();
 
   const getMyList = async () => {
+    console.log('Executa');
     setLoading(true);
-    setMyList([]);
-    const docRef = doc(database, 'users', user.id);
-    const docSnap = await getDoc(docRef);
-    const data = docSnap.data();
-    if (data && !!data?.movieList) {
-      setMyList(data.movieList);
-    }
+    const snapshot = await getDocs(collection(database, 'users', user.id, 'movie_list'));
+    const movieList: DocumentData[] = [];
+    snapshot.forEach((doc) => {
+      movieList.push(doc.data());
+    });
+    setMyList(movieList as MoviePropsExtended[]);
     setLoading(false);
   };
 
   const addOrRemoveFromMyList = async (movie: MoviePropsExtended) => {
     setLoading(true);
-    let myListupdated = [...myList];
-    if (myListupdated.some((listedMovie) => listedMovie.id === movie.id)) {
-      myListupdated = myListupdated.filter((listedMovie) => listedMovie.id !== movie.id);
+    const docRef = doc(database, 'users', user.id, 'movie_list', movie.id.toString());
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await deleteDoc(docRef);
     } else {
-      myListupdated.push(movie);
+      await setDoc(docRef, movie);
     }
-    await setDoc(
-      doc(database, 'users', user.id),
-      {
-        movieList: myListupdated,
-      },
-      { merge: true }
-    );
-    setMyList(myListupdated);
+    await getMyList();
     setLoading(false);
   };
 
   useEffect(() => {
-    if (!myList.length) {
+    if (user.id) {
       getMyList();
     }
-  }, [myList]);
+  }, [user]);
 
   return (
     <MyListContext.Provider

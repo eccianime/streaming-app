@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 import { DateTime } from 'luxon';
 import { Center, HStack, Icon, Image, Pressable, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
@@ -11,7 +12,7 @@ import { getFromMovies, getFromSeries } from '../../../../services/tmdb';
 import { MoviePropsExtended } from '../../../../types/components';
 import { VideoProps } from '../../../../types/dto';
 
-const { width } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 const { colors } = THEME;
 
 const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
@@ -26,7 +27,7 @@ const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
         const response = movie?.number_of_episodes
           ? await getFromSeries(`${movie?.id}/videos`)
           : await getFromMovies(`${movie?.id}/videos`);
-        setCurrentVideos(response.results);
+        setCurrentVideos(response.results.filter((video: VideoProps) => video.site === 'YouTube'));
         setLoading(false);
       }
     })();
@@ -34,16 +35,20 @@ const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
 
   return (
     <>
-      <Modal visible={Boolean(videoModalKey)} onRequestClose={() => setVideoModalKey(undefined)}>
-        <VStack bg="black" flexGrow={1} justifyContent="center" alignItems={'center'}>
-          <YoutubePlayer
-            width={width}
-            height={(width * 9) / 16}
-            play={true}
-            videoId={videoModalKey}
-          />
-        </VStack>
-      </Modal>
+      {Boolean(videoModalKey) && (
+        <Modal visible>
+          <VStack position={'absolute'} left={0} top={0} w={width} h={height}>
+            <Pressable bg="black" flexGrow={1} onPress={() => setVideoModalKey(undefined)} />
+            <YoutubePlayer
+              width={width}
+              height={(width * 9) / 16}
+              play={true}
+              videoId={videoModalKey}
+            />
+            <Pressable bg="black" flexGrow={1} onPress={() => setVideoModalKey(undefined)} />
+          </VStack>
+        </Modal>
+      )}
       {isLoading ? (
         <MiniLoading />
       ) : !!currentVideos.length ? (

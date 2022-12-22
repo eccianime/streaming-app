@@ -29,6 +29,7 @@ export type MovieProps = {
   vote_count: number;
   video: boolean;
   vote_average: number;
+  first_air_date?: string;
 };
 
 export type MoviePropsExtended = MovieProps & {
@@ -47,6 +48,7 @@ export type MoviePropsExtended = MovieProps & {
   videos: VideoResultProps;
   // for series
   number_of_episodes: number;
+  name: string;
 };
 
 export type ProducerProps = {
