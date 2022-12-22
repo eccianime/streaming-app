@@ -2,11 +2,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { DateTime } from 'luxon';
 import { Center, HStack, Icon, Image, Pressable, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { Dimensions } from 'react-native';
-import { MiniLoading } from '../../../../components/common/MiniLoading';
+import { Dimensions, Modal } from 'react-native';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
+import { MiniLoading } from '../../../../components/common/MiniLoading';
 import { THEME } from '../../../../config/theme';
-import { getFromMovies } from '../../../../services/tmdb';
+import { getFromMovies, getFromSeries } from '../../../../services/tmdb';
 import { MoviePropsExtended } from '../../../../types/components';
 import { VideoProps } from '../../../../types/dto';
 
@@ -16,12 +17,15 @@ const { colors } = THEME;
 const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
   const [currentVideos, setCurrentVideos] = useState<VideoProps[]>([]);
   const [isLoading, setLoading] = useState(false);
+  const [videoModalKey, setVideoModalKey] = useState<undefined | string>(undefined);
 
   useEffect(() => {
     (async () => {
       if (movie?.id) {
         setLoading(true);
-        const response = await getFromMovies(`${movie?.id}/videos`);
+        const response = movie?.number_of_episodes
+          ? await getFromSeries(`${movie?.id}/videos`)
+          : await getFromMovies(`${movie?.id}/videos`);
         setCurrentVideos(response.results);
         setLoading(false);
       }
@@ -30,6 +34,16 @@ const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
 
   return (
     <>
+      <Modal visible={Boolean(videoModalKey)} onRequestClose={() => setVideoModalKey(undefined)}>
+        <VStack bg="black" flexGrow={1} justifyContent="center" alignItems={'center'}>
+          <YoutubePlayer
+            width={width}
+            height={(width * 9) / 16}
+            play={true}
+            videoId={videoModalKey}
+          />
+        </VStack>
+      </Modal>
       {isLoading ? (
         <MiniLoading />
       ) : !!currentVideos.length ? (
@@ -39,6 +53,7 @@ const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
               color: colors.white,
               foreground: true,
             }}
+            onPress={() => setVideoModalKey(video.key)}
             key={video.id}
             mb={3}
           >

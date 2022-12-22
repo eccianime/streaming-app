@@ -15,26 +15,29 @@ import { Loading } from '../components';
 const { Navigator, Screen } = createStackNavigator<AppNavigationParams>();
 
 const AppRoutes = () => {
-    const { colors } = THEME;
-    const { isLoading } = useAppContext();
-    return (
-        <>
-            <Navigator screenOptions={{
-                headerShown: false,
-                cardStyle: {
-                    backgroundColor: colors.white
-                }
-            }} initialRouteName='Account'>
-                <Screen name='Onboarding' component={Onboarding} />
-                <Screen name='Auth' component={Auth} />
-                <Screen name='Account Setup' component={AccountSetup} />
-                <Screen name='Account' component={Account} />
-                <Screen name='Notifications' component={Notifications} />
-                <Screen name='Movie' component={Movie} />
-            </Navigator>
-            { isLoading && <Loading /> }
-        </>
-    );
-}
+  const { colors } = THEME;
+  const { isLoading } = useAppContext();
+  return (
+    <>
+      <Navigator
+        screenOptions={{
+          headerShown: false,
+          cardStyle: {
+            backgroundColor: colors.white,
+          },
+        }}
+        initialRouteName="Auth"
+      >
+        <Screen name="Onboarding" component={Onboarding} />
+        <Screen name="Auth" component={Auth} />
+        <Screen name="Account Setup" component={AccountSetup} />
+        <Screen name="Account" component={Account} />
+        <Screen name="Notifications" component={Notifications} />
+        <Screen name="Movie" component={Movie} />
+      </Navigator>
+      {isLoading && <Loading />}
+    </>
+  );
+};
 
 export default AppRoutes;

@@ -1,18 +1,46 @@
 import { Ionicons } from '@expo/vector-icons';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Checkbox, HStack, Icon, Text, View, VStack } from 'native-base';
 import React, { useState } from 'react';
-import { Pressable } from 'react-native';
+import { Alert, Pressable } from 'react-native';
+import { doc, setDoc } from 'firebase/firestore';
 
-import { AppleLogo, FacebookLogo, GoogleLogo, Logo } from '../../assets/svg';
+import { FacebookLogo, GoogleLogo, Logo } from '../../assets/svg';
 import { Button, ClearButton, Input, Screen } from '../../components';
+import { auth, database } from '../../config/firebaseConfig';
 import { THEME } from '../../config/theme';
 import { useAppNavigation } from '../../types/navigation';
+import firebaseErrorCodes from './firebaseAuthErrorCodes.json';
 
 const CreateAccount = () => {
   const navigation = useAppNavigation();
   const { colors } = THEME;
+  const [registerForm, setRegisterForm] = useState({
+    email: '',
+    pass: '',
+  });
 
-  const createAccount = () => navigation.navigate('Account Setup', { screen: 'Choose Interest' });
+  const createAccount = async () => {
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        registerForm.email,
+        registerForm.pass
+      );
+      await setDoc(doc(database, 'users', user.uid), {
+        email: registerForm.email,
+        id: user.uid,
+      });
+
+      navigation.navigate('Account Setup', {
+        screen: 'Choose Interest',
+        params: { userId: user.uid },
+      });
+    } catch (error: any) {
+      const targetError = firebaseErrorCodes.find((item) => item.code === error.code);
+      Alert.alert('Error', targetError?.description || error.code);
+    }
+  };
   const navigateToSignIn = () => navigation.navigate('Auth', { screen: 'Login' });
 
   const [isVisiblePassword, setVisiblePassword] = useState<boolean>(false);
@@ -33,6 +61,7 @@ const CreateAccount = () => {
         </Text>
 
         <Input
+          onChangeText={(email: string) => setRegisterForm({ ...registerForm, email })}
           placeholder="Email"
           keyboardType="email-address"
           leftElement={
@@ -40,6 +69,7 @@ const CreateAccount = () => {
           }
         />
         <Input
+          onChangeText={(pass: string) => setRegisterForm({ ...registerForm, pass })}
           placeholder="Password"
           leftElement={
             <Icon as={<Ionicons name="lock-closed" />} size={5} ml="4" color={colors.gray[400]} />
@@ -89,14 +119,11 @@ const CreateAccount = () => {
         </HStack>
 
         <HStack justifyContent="space-between" px={'5'} mb={'7'}>
-          <ClearButton flex={1} onPress={navigateToFacebook} height={'16'}>
+          <ClearButton flex={1} onPress={navigateToFacebook} height={'16'} width={'16'}>
             <FacebookLogo height={25} />
           </ClearButton>
-          <ClearButton flex={1} mx={10} onPress={navigateToGoogle} height={'16'}>
+          <ClearButton flex={1} mx={10} onPress={navigateToGoogle} height={'16'} width={'16'}>
             <GoogleLogo height={25} />
-          </ClearButton>
-          <ClearButton flex={1} onPress={navigateToApple} height={'16'}>
-            <AppleLogo height={25} />
           </ClearButton>
         </HStack>
 

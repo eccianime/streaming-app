@@ -7,7 +7,7 @@ import { Comments, MoreLikeThis, Trailers } from './Tabs';
 const MovieTab = ({ movie }: { movie: MoviePropsExtended }) => {
   const { colors } = THEME;
   const [currentTab, setCurrentTab] = useState(0);
-  const tabs = ['Trailers', 'More Like This', 'Reviews'];
+  const tabs = ['Trailers', 'More Like This' /*, 'Reviews'*/];
   return (
     <VStack>
       <HStack mb={5} my={3} w="full" justifyContent={'space-between'}>

@@ -8,7 +8,7 @@ import { useAppNavigation } from '../../types/navigation';
 
 const Home = () => {
   const { space } = THEME;
-  const { topRatedMovies, popularMovies } = useHomeContext();
+  const { topRatedMovies, popularMovies, popularSeries, topRatedSeries } = useHomeContext();
   const { isLoading } = useAppContext();
   const navigation = useAppNavigation();
 
@@ -22,14 +22,26 @@ const Home = () => {
     <Screen contentContainerStyle={{ paddingBottom: space[5] }}>
       <LatestMovie />
       <MovieHList
+        movies={popularMovies.slice(0, 5)}
+        title="New Movie Releases"
+        goToDetails={(title) => navigateToListDetails(title, popularMovies)}
+      />
+      <MovieHList
+        movies={popularSeries.slice(0, 5)}
+        title="New Series Releases"
+        goToDetails={(title) => navigateToListDetails(title, popularSeries)}
+        isSeries
+      />
+      <MovieHList
         movies={topRatedMovies.slice(0, 5)}
         title="Top Rated Movies"
         goToDetails={(title) => navigateToListDetails(title, topRatedMovies)}
       />
       <MovieHList
-        movies={popularMovies.slice(0, 5)}
-        title="New Releases"
-        goToDetails={(title) => navigateToListDetails(title, popularMovies)}
+        movies={topRatedSeries.slice(0, 5)}
+        title="Top Rated Series"
+        goToDetails={(title) => navigateToListDetails(title, topRatedSeries)}
+        isSeries
       />
     </Screen>
   );

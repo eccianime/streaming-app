@@ -4,19 +4,21 @@ import React from 'react';
 import { Logo } from '../../assets/svg';
 import { THEME } from '../../config/theme';
 import { useAppContext } from '../../contexts/app';
-import { getFromMovies, IMAGE_BASE_URL } from '../../services/tmdb';
+import { getFromMovies, getFromSeries, IMAGE_BASE_URL } from '../../services/tmdb';
 import { MovieItemProps } from '../../types/components';
 import { CreditResultProps, ImageResultProps } from '../../types/dto';
 import { useAppNavigation } from '../../types/navigation';
 
-const Movie = ({ data, h, w }: MovieItemProps) => {
+const Movie = ({ data, h, w, isSeries }: MovieItemProps) => {
   const { setLoading } = useAppContext();
   const { colors } = THEME;
   const navigation = useAppNavigation();
 
   const handleGetMovieDetails = async () => {
     setLoading(true);
-    const detailsResult = await getFromMovies(`${data.id}?append_to_response=images,credits`);
+    const detailsResult = isSeries
+      ? await getFromSeries(`${data.id}?append_to_response=images,credits`)
+      : await getFromMovies(`${data.id}?append_to_response=images,credits`);
     const targetImage = (detailsResult.images as ImageResultProps).backdrops.find(
       (image) => image.iso_639_1 === 'en'
     )?.file_path;
@@ -25,16 +27,14 @@ const Movie = ({ data, h, w }: MovieItemProps) => {
 
     setLoading(false);
 
-    navigation.dispatch(
-      StackActions.push('Movie', {
-        screen: 'Details',
-        params: {
-          movie: detailsResult,
-          image: IMAGE_BASE_URL + (targetImage ? targetImage : detailsResult.poster_path),
-          credits: cast.slice(0, 10),
-        },
-      })
-    );
+    navigation.push('Movie', {
+      screen: 'Details',
+      params: {
+        movie: detailsResult,
+        image: IMAGE_BASE_URL + (targetImage ? targetImage : detailsResult.poster_path),
+        credits: cast.slice(0, 10),
+      },
+    });
   };
   return (
     <Pressable

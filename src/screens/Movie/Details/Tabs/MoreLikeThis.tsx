@@ -5,7 +5,7 @@ import { Movie } from '../../../../components';
 import { MiniLoading } from '../../../../components/common/MiniLoading';
 
 import { THEME } from '../../../../config/theme';
-import { getFromMovies } from '../../../../services/tmdb';
+import { getFromMovies, getFromSeries } from '../../../../services/tmdb';
 import { MovieProps, MoviePropsExtended } from '../../../../types/components';
 
 const MoreLikeThis = ({ movie }: { movie: MoviePropsExtended }) => {
@@ -16,7 +16,9 @@ const MoreLikeThis = ({ movie }: { movie: MoviePropsExtended }) => {
     (async () => {
       if (movie?.id) {
         setLoading(true);
-        const response = await getFromMovies(`${movie?.id}/similar`);
+        const response = movie?.number_of_episodes
+          ? await getFromSeries(`${movie?.id}/similar`)
+          : await getFromMovies(`${movie?.id}/similar`);
         setSimilar(response.results);
         setLoading(false);
       }

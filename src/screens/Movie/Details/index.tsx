@@ -1,10 +1,9 @@
-import { Center, HStack, Image, Text, VStack } from 'native-base';
+import { Center, Image, VStack } from 'native-base';
 import React from 'react';
 import { Dimensions } from 'react-native';
 
-import { DownloadFillIcon, Logo, PlayIcon } from '../../../assets/svg';
-import { Button, Screen } from '../../../components';
-import { THEME } from '../../../config/theme';
+import { Logo } from '../../../assets/svg';
+import { Screen } from '../../../components';
 import { MovieDetailsProps } from '../../../types/screens';
 import BasicInfo from './BasicInfo';
 import MovieTab from './MovieTab';

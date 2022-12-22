@@ -1,4 +1,10 @@
-import { NavigationProp, NavigatorScreenParams, useNavigation } from '@react-navigation/native';
+import {
+  NavigationProp,
+  NavigatorScreenParams,
+  RouteProp,
+  useNavigation,
+} from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { MovieProps, MoviePropsExtended } from './components';
 import { PersonProps } from './dto';
 
@@ -44,11 +50,16 @@ export type AuthNavigationParams = {
 // ========== Account Setup ==========
 
 export type AccountSetupNavigationParams = {
-  'Choose Interest': undefined;
-  'Fill Profile': undefined;
+  'Choose Interest': { userId: string };
+  'Fill Profile': { userId: string };
   'Create PIN': undefined;
   'Set Fingerprint': undefined;
 };
+
+export type AccountSetupRouting<Screen extends keyof AccountSetupNavigationParams> = RouteProp<
+  AccountSetupNavigationParams,
+  Screen
+>;
 
 // ========== Movie Details ==========
 
@@ -70,6 +81,6 @@ export type AppNavigationParams = {
   Movie: NavigatorScreenParams<MovieNavigationParams>;
 };
 
-export type AppNavigation = NavigationProp<AppNavigationParams>;
+export type AppNavigation = StackNavigationProp<AppNavigationParams>;
 
 export const useAppNavigation = () => useNavigation<AppNavigation>();

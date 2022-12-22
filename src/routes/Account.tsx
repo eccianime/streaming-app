@@ -84,7 +84,7 @@ const AccountRoutes = () => {
       <Screen name="Home" component={Home} />
       <Screen name="Explore" component={Explore} />
       <Screen name="My List" component={MyList} />
-      <Screen name="Download" component={Download} />
+      {/* <Screen name="Download" component={Download} /> */}
       <Screen name="Profile" component={Profile} />
     </Navigator>
   );

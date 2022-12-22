@@ -15,7 +15,6 @@ const imageHeight = (imageWidth * 4) / 3;
 
 const MyList = () => {
   const { myList } = useMyListContext();
-  const { colors } = THEME;
   const navigation = useAppNavigation();
 
   const goToSearch = () => {

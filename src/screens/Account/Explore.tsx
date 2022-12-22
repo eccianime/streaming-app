@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 import { Center, HStack, Icon, Pressable, Text, View, VStack } from 'native-base';
 import React, { useEffect, useState, useCallback } from 'react';
 import { Dimensions } from 'react-native';
@@ -18,17 +19,17 @@ const imageHeight = (imageWidth * 4) / 3;
 
 const Explore = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [discovery, setDiscovery] = useState<MoviePropsExtended[]>([]);
+  const [discovery, setMovieDiscovery] = useState<MoviePropsExtended[]>([]);
 
   const [searchText, setSearchText] = useState<string>('');
   const [searchResults, setSearchResults] = useState<MoviePropsExtended[]>([]);
 
   const debouncedText = useDebounce(searchText, 1000);
 
-  const getNowPlaying = async () => {
+  const getDiscovery = async () => {
     setLoading(true);
     const { results } = await getFromDiscover('movie');
-    setDiscovery(results);
+    setMovieDiscovery(results);
     setLoading(false);
   };
 
@@ -38,7 +39,11 @@ const Explore = () => {
       setSearchResults([]);
     } else {
       const { results } = await getFromSearch('movie', searchValue);
-      setSearchResults(results);
+      setSearchResults(
+        results.filter(
+          (item: MoviePropsExtended) => item.genre_ids.length > 0 && item.vote_average > 0
+        )
+      );
     }
     setLoading(false);
   };
@@ -58,13 +63,20 @@ const Explore = () => {
 
   useEffect(() => {
     if (!discovery.length) {
-      getNowPlaying();
+      getDiscovery();
     }
   }, [discovery]);
 
   useEffect(() => {
     getSearchResults(debouncedText);
   }, [debouncedText]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setSearchText('');
+      setSearchResults([]);
+    }, [])
+  );
 
   return (
     <Screen contentContainerStyle={{ backgroundColor: colors.white }}>
