@@ -12,10 +12,10 @@ import { PersonProps } from './dto';
 
 export type ProfileNavigationParams = {
   'Option List': undefined;
+  'Edit Profile': undefined;
   Subscribe: undefined;
   Payment: undefined;
   'Card Details': undefined;
-  Edit: undefined;
   Notification: undefined;
   Download: undefined;
   Security: undefined;

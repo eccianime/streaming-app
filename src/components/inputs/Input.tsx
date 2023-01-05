@@ -1,14 +1,17 @@
-import { Input as NBInput, Text, View } from 'native-base';
+import { Input as NBInput, View } from 'native-base';
 import React from 'react';
 import { THEME } from '../../config/theme';
+import { useAppContext } from '../../contexts/app';
 import { InputProps } from '../../types/components';
+import Text from './Text';
 
-const Input = ({ label, viewStyle, ...props }: InputProps) => {
+const Input = ({ label, viewStyle, value, onChangeText, ...props }: InputProps) => {
+  const { isDarkMode } = useAppContext();
   const { colors } = THEME;
   return (
     <View style={viewStyle}>
       {!!label && (
-        <Text fontFamily="heading" color="gray.900" fontSize="md" mb="4">
+        <Text fontFamily="heading" fontSize="md" mb="4">
           {label}
         </Text>
       )}
@@ -23,11 +26,14 @@ const Input = ({ label, viewStyle, ...props }: InputProps) => {
         _input={{
           fontFamily: 'heading',
         }}
-        bg="gray.50"
+        color={colors.textColor[isDarkMode ? 'dark' : 'light']}
+        bg={isDarkMode ? 'gray.800' : 'gray.50'}
         borderColor={'gray.100'}
         size="lg"
         fontFamily="body"
         mb={'5'}
+        value={value}
+        onChangeText={onChangeText}
         {...props}
       />
     </View>

@@ -1,7 +1,13 @@
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 
-import { Urbanist_300Light, Urbanist_400Regular, Urbanist_600SemiBold, Urbanist_700Bold, Urbanist_800ExtraBold } from '@expo-google-fonts/urbanist';
+import {
+  Urbanist_300Light,
+  Urbanist_400Regular,
+  Urbanist_600SemiBold,
+  Urbanist_700Bold,
+  Urbanist_800ExtraBold,
+} from '@expo-google-fonts/urbanist';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NativeBaseProvider, StatusBar, View } from 'native-base';
@@ -17,11 +23,15 @@ export default function App() {
 
   async function _loadAssetsAsync() {
     await Font.loadAsync({
-      Urbanist_300Light, Urbanist_400Regular, Urbanist_600SemiBold, Urbanist_700Bold, Urbanist_800ExtraBold
+      Urbanist_300Light,
+      Urbanist_400Regular,
+      Urbanist_600SemiBold,
+      Urbanist_700Bold,
+      Urbanist_800ExtraBold,
     });
     setAppReady(true);
   }
-  
+
   useEffect(() => {
     _loadAssetsAsync();
   }, []);
@@ -34,14 +44,14 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={THEME}>
-      {
-        isAppReady ?
+      {isAppReady ? (
         <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
-            <StatusBar backgroundColor={'transparent'} translucent barStyle='light-content' />
-            <Routes />
+          <StatusBar backgroundColor={'transparent'} translucent barStyle="dark-content" />
+          <Routes />
         </View>
-      : <Loading />
-      }
-      </NativeBaseProvider>
+      ) : (
+        <Loading />
+      )}
+    </NativeBaseProvider>
   );
 }

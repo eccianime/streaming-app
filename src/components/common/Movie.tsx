@@ -1,5 +1,4 @@
-import { StackActions } from '@react-navigation/native';
-import { Center, Image, Pressable, Text } from 'native-base';
+import { Center, Image, Pressable } from 'native-base';
 import React from 'react';
 import { Logo } from '../../assets/svg';
 import { THEME } from '../../config/theme';
@@ -8,6 +7,7 @@ import { getFromMovies, getFromSeries, IMAGE_BASE_URL } from '../../services/tmd
 import { MovieItemProps } from '../../types/components';
 import { CreditResultProps, ImageResultProps } from '../../types/dto';
 import { useAppNavigation } from '../../types/navigation';
+import Text from '../inputs/Text';
 
 const Movie = ({ data, h, w }: MovieItemProps) => {
   const { setLoading } = useAppContext();
@@ -69,7 +69,7 @@ const Movie = ({ data, h, w }: MovieItemProps) => {
         borderRadius="md"
       >
         <Text fontSize={'sm'} fontFamily="body" color={'white'}>
-          {parseInt((data.vote_average * 100).toFixed(0)) / 100}
+          {parseInt((data.vote_average * 10).toFixed(0)) / 10}
         </Text>
       </Center>
     </Pressable>

@@ -22,7 +22,6 @@ const MyListProvider = ({ children }: ProviderProps) => {
   const { setLoading } = useAppContext();
 
   const getMyList = async () => {
-    console.log('Executa');
     setLoading(true);
     const snapshot = await getDocs(collection(database, 'users', user.id, 'movie_list'));
     const movieList: DocumentData[] = [];

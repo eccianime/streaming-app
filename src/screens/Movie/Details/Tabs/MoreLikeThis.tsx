@@ -1,7 +1,7 @@
-import { Center, ScrollView, Text, View } from 'native-base';
+import { Center, ScrollView, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
-import { Movie } from '../../../../components';
+import { Movie, Text } from '../../../../components';
 import { MiniLoading } from '../../../../components/common/MiniLoading';
 
 import { THEME } from '../../../../config/theme';
@@ -50,7 +50,7 @@ const MoreLikeThis = ({ movie }: { movie: MoviePropsExtended }) => {
         ))
       ) : (
         <Center>
-          <Text color={'gray.900'} fontSize={'md'} fontFamily={'heading'}>
+          <Text fontSize={'md'} fontFamily={'heading'}>
             There are no related movies
           </Text>
         </Center>

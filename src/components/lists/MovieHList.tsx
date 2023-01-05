@@ -1,25 +1,28 @@
-import { Button, HStack, ScrollView, Text, View, VStack } from 'native-base';
+import { Button, HStack, ScrollView, View, VStack } from 'native-base';
 import React from 'react';
 import { THEME } from '../../config/theme';
+import { useAppContext } from '../../contexts/app';
 import { MovieHListProps } from '../../types/components';
 import Movie from '../common/Movie';
+import Text from '../inputs/Text';
 
 const MovieHList = ({ movies, title, goToDetails, isSeries }: MovieHListProps) => {
   const { colors } = THEME;
+  const { isDarkMode } = useAppContext();
 
   const navigateToListDetails = () => {
     goToDetails(title);
   };
   return (
-    <VStack bg={'white'} flex={1} pt={3}>
+    <VStack bg={colors.background[isDarkMode ? 'dark' : 'light']} flex={1} pt={3}>
       <HStack px={5} pb={3} justifyContent={'space-between'} alignItems="center">
-        <Text color={'gray.900'} fontFamily="heading" fontSize={'lg'}>
+        <Text fontFamily="heading" fontSize={'lg'}>
           {title}
         </Text>
         <Button
-          bg={colors.white}
+          bg={isDarkMode ? colors.background.dark : colors.white}
           _pressed={{
-            bg: colors.primary[100],
+            bg: isDarkMode ? colors.background.dark : colors.primary[100],
           }}
           onPress={navigateToListDetails}
         >

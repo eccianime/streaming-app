@@ -1,10 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-import { Center, HStack, Icon, Pressable, Text, View, VStack } from 'native-base';
+import { Center, HStack, Icon, Pressable, View, VStack } from 'native-base';
 import React, { useEffect, useState, useCallback } from 'react';
 import { Dimensions } from 'react-native';
 import { EqualizerIcon, NotFound } from '../../assets/svg';
-import { Input, Movie, Screen } from '../../components';
+import { Input, Movie, Screen, Text } from '../../components';
 import { MiniLoading } from '../../components/common/MiniLoading';
 import { THEME } from '../../config/theme';
 import { useAppContext } from '../../contexts/app';
@@ -12,12 +12,13 @@ import useDebounce from '../../hooks/useDebounce';
 import { getFromDiscover, getFromMovies, getFromSearch } from '../../services/tmdb';
 import { MoviePropsExtended } from '../../types/components';
 
-const { colors, space } = THEME;
-const { width } = Dimensions.get('screen');
-const imageWidth = width / 2 - space[5] * 1.5;
-const imageHeight = (imageWidth * 4) / 3;
-
 const Explore = () => {
+  const { colors, space } = THEME;
+  const { width } = Dimensions.get('screen');
+  const imageWidth = width / 2 - space[5] * 1.5;
+  const imageHeight = (imageWidth * 4) / 3;
+
+  const { isDarkMode } = useAppContext();
   const [isLoading, setLoading] = useState<boolean>(false);
   const [discovery, setMovieDiscovery] = useState<MoviePropsExtended[]>([]);
 
@@ -68,7 +69,9 @@ const Explore = () => {
   }, [discovery]);
 
   useEffect(() => {
-    getSearchResults(debouncedText);
+    if (debouncedText.length > 3) {
+      getSearchResults(debouncedText);
+    }
   }, [debouncedText]);
 
   useFocusEffect(
@@ -79,7 +82,7 @@ const Explore = () => {
   );
 
   return (
-    <Screen contentContainerStyle={{ backgroundColor: colors.white }}>
+    <Screen>
       <VStack flexGrow={1} py={'10'} px={'5'}>
         <HStack w="full" justifyContent={'space-between'}>
           <VStack flex={1} mr="2">
@@ -89,11 +92,11 @@ const Explore = () => {
                   as={<Ionicons name="search-outline" />}
                   size={5}
                   ml="4"
-                  color={colors.gray[400]}
+                  color={isDarkMode ? colors.primary[500] : colors.gray[400]}
                 />
               }
               value={searchText}
-              onChangeText={setSearchText}
+              onChangeText={(value: string) => setSearchText(value)}
               placeholder="Search"
             />
           </VStack>
@@ -102,7 +105,7 @@ const Explore = () => {
             h={'12'}
             w={'12'}
             rounded="xl"
-            bg="primary.100"
+            bg={isDarkMode ? 'primary.900' : 'primary.100'}
             justifyContent={'center'}
             alignItems={'center'}
           >
@@ -121,7 +124,7 @@ const Explore = () => {
             <Text fontSize={'2xl'} fontFamily="heading" color={'primary.600'} mb="2">
               Not Found
             </Text>
-            <Text fontSize={'xl'} fontFamily="body" color={'gray.900'} textAlign="center">
+            <Text fontSize={'xl'} fontFamily="body" textAlign="center">
               Sorry, the keyword you entered could not be found. Try to check again or search with
               other keywords
             </Text>

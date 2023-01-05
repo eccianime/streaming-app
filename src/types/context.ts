@@ -19,7 +19,8 @@ export type ProviderProps = {
 export type AuthContextProps = {
   user: UserProps;
   signIn: (email: string, pass: string) => Promise<void>;
-  addInterests: (interest: GenreProps[]) => Promise<void>;
+  signUp: (email: string, pass: string) => Promise<void>;
+  addInterests: (userId: string, interest: GenreProps[]) => Promise<void>;
   fillProfile: (profileForm: { [x: string]: string }) => Promise<void>;
 };
 
@@ -35,6 +36,8 @@ export type HomeContextProps = {
 export type AppContextProps = {
   isLoading: boolean;
   setLoading: (isLoading: boolean) => void;
+  isDarkMode: boolean;
+  setDarkMode: (value: boolean) => void;
 };
 
 export type MovieContextProps = {

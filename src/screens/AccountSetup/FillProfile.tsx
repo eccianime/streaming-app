@@ -1,11 +1,11 @@
 import { FontAwesome } from '@expo/vector-icons';
-import { HStack, Icon, Text, View, VStack } from 'native-base';
+import { HStack, Icon, View, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Alert } from 'react-native';
 
 import { UserImage } from '../../assets/svg';
-import { Button, Input, Screen, SimpleHeader } from '../../components';
+import { Button, Input, Screen, SimpleHeader, Text } from '../../components';
 import { AccountSetupRouting, useAppNavigation } from '../../types/navigation';
 import { database } from '../../config/firebaseConfig';
 import { useAuthContext } from '../../contexts/auth';

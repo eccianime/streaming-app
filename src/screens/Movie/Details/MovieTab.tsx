@@ -1,5 +1,6 @@
-import { HStack, Pressable, Text, VStack } from 'native-base';
+import { HStack, Pressable, VStack } from 'native-base';
 import { useState } from 'react';
+import { Text } from '../../../components';
 import { THEME } from '../../../config/theme';
 import { MoviePropsExtended } from '../../../types/components';
 import { Comments, MoreLikeThis, Trailers } from './Tabs';

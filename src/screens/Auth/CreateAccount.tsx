@@ -1,46 +1,23 @@
 import { Ionicons } from '@expo/vector-icons';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { Checkbox, HStack, Icon, Text, View, VStack } from 'native-base';
+import { Checkbox, HStack, Icon, View, VStack } from 'native-base';
 import React, { useState } from 'react';
-import { Alert, Pressable } from 'react-native';
-import { doc, setDoc } from 'firebase/firestore';
+import { Pressable } from 'react-native';
 
 import { FacebookLogo, GoogleLogo, Logo } from '../../assets/svg';
-import { Button, ClearButton, Input, Screen } from '../../components';
-import { auth, database } from '../../config/firebaseConfig';
+import { Button, ClearButton, Input, Screen, Text } from '../../components';
 import { THEME } from '../../config/theme';
+import { useAuthContext } from '../../contexts/auth';
 import { useAppNavigation } from '../../types/navigation';
-import firebaseErrorCodes from './firebaseAuthErrorCodes.json';
 
 const CreateAccount = () => {
   const navigation = useAppNavigation();
+  const { signUp } = useAuthContext();
   const { colors } = THEME;
   const [registerForm, setRegisterForm] = useState({
     email: '',
     pass: '',
   });
 
-  const createAccount = async () => {
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        registerForm.email,
-        registerForm.pass
-      );
-      await setDoc(doc(database, 'users', user.uid), {
-        email: registerForm.email,
-        id: user.uid,
-      });
-
-      navigation.navigate('Account Setup', {
-        screen: 'Choose Interest',
-        params: { userId: user.uid },
-      });
-    } catch (error: any) {
-      const targetError = firebaseErrorCodes.find((item) => item.code === error.code);
-      Alert.alert('Error', targetError?.description || error.code);
-    }
-  };
   const navigateToSignIn = () => navigation.navigate('Auth', { screen: 'Login' });
 
   const [isVisiblePassword, setVisiblePassword] = useState<boolean>(false);
@@ -56,7 +33,7 @@ const CreateAccount = () => {
         <View alignSelf={'center'}>
           <Logo width={80} height={80} />
         </View>
-        <Text textAlign={'center'} color="gray.900" fontSize="4xl" fontFamily="heading" my={'6'}>
+        <Text textAlign={'center'} fontSize="4xl" fontFamily="heading" my={'6'}>
           {'Create your Account'}
         </Text>
 
@@ -100,11 +77,11 @@ const CreateAccount = () => {
           isChecked={isRemembering}
           onChange={(isSelected) => setRemember(isSelected)}
         >
-          <Text color="gray.900" fontFamily="heading" fontSize="sm">
+          <Text fontFamily="heading" fontSize="sm">
             Remember me
           </Text>
         </Checkbox>
-        <Button onPress={createAccount} mb={'10'}>
+        <Button onPress={() => signUp(registerForm.email, registerForm.pass)} mb={'10'}>
           <Text color="white" fontFamily="heading" fontSize="lg">
             Sign Up
           </Text>

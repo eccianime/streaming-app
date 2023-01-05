@@ -1,8 +1,8 @@
-import { Text, View, VStack, Image } from 'native-base';
+import { View, VStack, Image } from 'native-base';
 import React, { useRef, useState } from 'react';
 import { Dimensions } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { Button } from '../../components';
+import { Button, Text } from '../../components';
 import { useAppNavigation } from '../../types/navigation';
 import SplashImage from '../../assets/images/splashdark.png';
 

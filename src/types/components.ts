@@ -98,3 +98,5 @@ export type ReviewProps = {
   updated_at: string;
   url: string;
 };
+
+export type SwitchProps = { initialState?: boolean; onChange: (value: boolean) => void };

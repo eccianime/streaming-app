@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Movie, Screen } from '../../components';
-import { Center, HStack, IconButton, ScrollView, Text, View, VStack } from 'native-base';
-import { Logo, NotFound, SearchIcon } from '../../assets/svg';
-import { THEME } from '../../config/theme';
+import { Center, HStack, IconButton, View, VStack } from 'native-base';
+import React from 'react';
 import { Dimensions } from 'react-native';
-import { MoviePropsExtended } from '../../types/components';
+import { Logo, NotFound, SearchIcon } from '../../assets/svg';
+import { Movie, Screen, Text } from '../../components';
+import { THEME } from '../../config/theme';
+import { useAppContext } from '../../contexts/app';
 import { useMyListContext } from '../../contexts/myList';
 import { useAppNavigation } from '../../types/navigation';
 
@@ -16,24 +16,31 @@ const imageHeight = (imageWidth * 4) / 3;
 const MyList = () => {
   const { myList } = useMyListContext();
   const navigation = useAppNavigation();
+  const { isDarkMode } = useAppContext();
 
   const goToSearch = () => {
     navigation.navigate('Account', { screen: 'Explore' });
   };
 
   return (
-    <Screen contentContainerStyle={{ backgroundColor: colors.white }}>
+    <Screen>
       <VStack flexGrow={1} py={'10'} px={'5'}>
         <HStack justifyContent={'space-between'} alignItems="center" w="full" mb={5}>
           <HStack>
             <Logo width={30} height={30} />
-            <Text ml="5" color={'gray.900'} fontFamily="heading" fontSize={'2xl'}>
+            <Text ml="5" fontFamily="heading" fontSize={'2xl'}>
               My List
             </Text>
           </HStack>
           <IconButton
             onPress={goToSearch}
-            icon={<SearchIcon width={30} height={30} color={colors.gray[900]} />}
+            icon={
+              <SearchIcon
+                width={30}
+                height={30}
+                color={isDarkMode ? colors.white : colors.gray[900]}
+              />
+            }
             borderRadius="full"
           />
         </HStack>
@@ -56,7 +63,7 @@ const MyList = () => {
             <Text fontSize={'2xl'} fontFamily="heading" color={'primary.600'} mb="2">
               Your List is Empty
             </Text>
-            <Text fontSize={'xl'} fontFamily="body" color={'gray.900'} textAlign="center">
+            <Text fontSize={'xl'} fontFamily="body" textAlign="center">
               It seems that you haven't added{'\n'}any movies to the list
             </Text>
           </Center>

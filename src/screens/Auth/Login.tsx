@@ -1,11 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { Checkbox, HStack, Icon, Text, theme, View, VStack } from 'native-base';
+import { Checkbox, HStack, Icon, View, VStack } from 'native-base';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
 
 import { FacebookLogo, GoogleLogo, Logo } from '../../assets/svg';
-import { Button, ClearButton, Input, Screen } from '../../components';
+import { Button, ClearButton, Input, Screen, Text } from '../../components';
 import { THEME } from '../../config/theme';
 import { useAuthContext } from '../../contexts/auth';
 import { AppNavigation } from '../../types/navigation';
@@ -34,28 +34,25 @@ const Login = () => {
         <View alignSelf={'center'}>
           <Logo width={80} height={80} />
         </View>
-        <Text textAlign={'center'} color="gray.900" fontSize="3xl" fontFamily="heading" my={'6'}>
+        <Text textAlign={'center'} fontSize="3xl" fontFamily="heading" my={'6'}>
           {'Login to your account'}
         </Text>
 
         <Input
+          value={loginForm.email}
           onChangeText={(email: string) => setLoginForm({ ...loginForm, email })}
           placeholder="Email"
           keyboardType="email-address"
           leftElement={
-            <Icon as={<Ionicons name="mail" />} size={5} ml="4" color={theme.colors.gray[400]} />
+            <Icon as={<Ionicons name="mail" />} size={5} ml="4" color={colors.gray[400]} />
           }
         />
         <Input
+          value={loginForm.pass}
           onChangeText={(pass: string) => setLoginForm({ ...loginForm, pass })}
           placeholder="Password"
           leftElement={
-            <Icon
-              as={<Ionicons name="lock-closed" />}
-              size={5}
-              ml="4"
-              color={theme.colors.gray[400]}
-            />
+            <Icon as={<Ionicons name="lock-closed" />} size={5} ml="4" color={colors.gray[400]} />
           }
           rightElement={
             <Pressable onPress={() => setVisiblePassword(!isVisiblePassword)}>
@@ -63,7 +60,7 @@ const Login = () => {
                 as={<Ionicons name={isVisiblePassword ? 'eye-off' : 'eye'} />}
                 size={5}
                 mr="4"
-                color={theme.colors.gray[400]}
+                color={colors.gray[400]}
               />
             </Pressable>
           }
@@ -83,7 +80,7 @@ const Login = () => {
           isChecked={isRemembering}
           onChange={(isSelected) => setRemember(isSelected)}
         >
-          <Text color="gray.900" fontFamily="heading" fontSize="sm">
+          <Text fontFamily="heading" fontSize="sm">
             Remember me
           </Text>
         </Checkbox>

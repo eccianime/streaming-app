@@ -1,5 +1,6 @@
-import { Center, HStack, Image, Text, VStack } from 'native-base';
+import { Center, HStack, Image, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
+import { Text } from '../../../../components';
 import { MiniLoading } from '../../../../components/common/MiniLoading';
 
 import { getFromMovies, IMAGE_BASE_URL } from '../../../../services/tmdb';
@@ -35,18 +36,18 @@ const Comments = ({ movie }: { movie: MoviePropsExtended }) => {
                 source={{ uri: IMAGE_BASE_URL + review.author_details.avatar_path }}
                 alt={review.author}
               />
-              <Text ml={5} fontFamily="heading" fontSize={'md'} color={'gray.900'}>
+              <Text ml={5} fontFamily="heading" fontSize={'md'}>
                 {review.author}
               </Text>
             </HStack>
-            <Text color={'gray.900'} fontFamily="body" fontSize={'xs'} mb={5}>
+            <Text fontFamily="body" fontSize={'xs'} mb={5}>
               {review.content}
             </Text>
           </VStack>
         ))
       ) : (
         <Center>
-          <Text color={'gray.900'} fontSize={'md'} fontFamily={'heading'}>
+          <Text fontSize={'md'} fontFamily={'heading'}>
             There are no reviews for this movie
           </Text>
         </Center>

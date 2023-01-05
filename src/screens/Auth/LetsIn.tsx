@@ -1,10 +1,10 @@
-import { HStack, Text, View, VStack } from 'native-base';
+import { HStack, View, VStack } from 'native-base';
 import React from 'react';
 import { Pressable, Dimensions } from 'react-native';
 import { FacebookAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 
 import { FacebookLogo, GoogleLogo, LetsInImage } from '../../assets/svg';
-import { Button, ClearButton } from '../../components';
+import { Button, ClearButton, Text } from '../../components';
 import { useAppNavigation } from '../../types/navigation';
 import { auth } from '../../config/firebaseConfig';
 
@@ -30,12 +30,12 @@ const LestIn = () => {
         {"Let's you in"}
       </Text>
       <ClearButton onPress={loginWithFacebook} leftIcon={<FacebookLogo width={20} height={20} />}>
-        <Text ml={2} color="gray.900" fontFamily="mono" fontSize="lg">
+        <Text ml={2} fontFamily="mono" fontSize="lg">
           Continue with Facebook
         </Text>
       </ClearButton>
       <ClearButton onPress={navigateToGoogle} leftIcon={<GoogleLogo width={20} height={20} />}>
-        <Text ml={2} color="gray.900" fontFamily="mono" fontSize="lg">
+        <Text ml={2} fontFamily="mono" fontSize="lg">
           Continue with Google
         </Text>
       </ClearButton>

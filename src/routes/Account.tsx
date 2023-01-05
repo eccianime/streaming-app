@@ -1,9 +1,9 @@
 import React from 'react';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AccountNavigationParams } from '../types/navigation';
 import { SvgProps } from 'react-native-svg';
 import { Dimensions } from 'react-native';
-import { Text, View } from 'native-base';
+import { View } from 'native-base';
 
 import { Home, Explore, MyList, Download } from '../screens/Account';
 import Profile from './Profile';
@@ -21,12 +21,16 @@ import {
   UserFillIcon,
   UserIcon,
 } from '../assets/svg';
+import { useAppContext } from '../contexts/app';
+import { Text } from '../components';
 
-const { Navigator, Screen } = createMaterialTopTabNavigator<AccountNavigationParams>();
+const { Navigator, Screen } = createBottomTabNavigator<AccountNavigationParams>();
 const { width } = Dimensions.get('screen');
 
 const AccountRoutes = () => {
   const { colors } = THEME;
+  const { isDarkMode } = useAppContext();
+
   const getLabelFromName = (name: string, focused: boolean) => {
     let Icon: React.FC<SvgProps>;
     switch (name) {
@@ -68,16 +72,18 @@ const AccountRoutes = () => {
       </View>
     );
   };
+
   return (
     <Navigator
-      tabBarPosition="bottom"
       screenOptions={({ route }) => ({
-        swipeEnabled: false,
-        tabBarIndicator: () => null,
+        headerShown: false,
         tabBarShowIcon: false,
+        tabBarIcon: () => null,
         tabBarLabel: ({ focused }) => getLabelFromName(route.name, focused),
         tabBarStyle: {
-          height: 70,
+          backgroundColor: colors.background[isDarkMode ? 'dark' : 'light'],
+          height: 90,
+          borderTopWidth: 0,
         },
       })}
     >

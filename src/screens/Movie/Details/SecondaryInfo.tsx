@@ -1,6 +1,7 @@
-import { FlatList, HStack, Image, Pressable, Text, View, VStack } from 'native-base';
+import { FlatList, HStack, Image, Pressable, View, VStack } from 'native-base';
 import React, { useCallback, useState } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
+import { Text } from '../../../components';
 
 import { IMAGE_BASE_URL } from '../../../services/tmdb';
 import { MoviePropsExtended } from '../../../types/components';
@@ -26,14 +27,13 @@ const SecondaryInfo = ({
   };
   return (
     <>
-      <Text color={'gray.900'} fontFamily="mono" fontSize={16} mb={3}>{`Genre: ${movie?.genres
+      <Text fontFamily="mono" fontSize={16} mb={3}>{`Genre: ${movie?.genres
         .map((genre) => genre.name)
         .join(', ')}`}</Text>
       <Text
         numberOfLines={numOfLines == 0 ? undefined : loadMore ? numOfLines : NUM_OF_LINES}
         onTextLayout={onTextLayout}
         textAlign="justify"
-        color={'gray.900'}
         fontFamily="body"
         fontSize={'sm'}
         mb={numOfLines > NUM_OF_LINES ? 0 : 5}
@@ -68,7 +68,7 @@ const SecondaryInfo = ({
               <View mr={2} w={12} h={12} bg="black" borderRadius="full" />
             )}
             <VStack>
-              <Text color={'gray.900'} fontFamily="mono" fontSize={12} lineHeight={'xs'} mb={1}>{`${
+              <Text fontFamily="mono" fontSize={12} lineHeight={'xs'} mb={1}>{`${
                 item.name.split(' ')[0]
               }\n${item.name.split(' ')[1]}`}</Text>
               <Text color={'gray.500'} fontFamily="body" fontSize={12}>

@@ -24,3 +24,9 @@ export { default as SendIcon } from './send.svg';
 
 export { default as EqualizerIcon } from './equalizer.svg';
 export { default as NotFound } from './not-found.svg';
+
+export { default as AlertIcon } from './alert.svg';
+export { default as EyeIcon } from './eye.svg';
+export { default as InfoIcon } from './info.svg';
+export { default as ShieldIcon } from './shield.svg';
+export { default as WorldIcon } from './world.svg';

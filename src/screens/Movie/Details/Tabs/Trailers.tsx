@@ -1,10 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { DateTime } from 'luxon';
-import { Center, HStack, Icon, Image, Pressable, Text, VStack } from 'native-base';
+import { Center, HStack, Icon, Image, Pressable, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Modal } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import { Text } from '../../../../components';
 
 import { MiniLoading } from '../../../../components/common/MiniLoading';
 import { THEME } from '../../../../config/theme';
@@ -37,6 +38,7 @@ const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
     <>
       {Boolean(videoModalKey) && (
         <Modal visible>
+          <StatusBar hidden />
           <VStack position={'absolute'} left={0} top={0} w={width} h={height}>
             <Pressable bg="black" flexGrow={1} onPress={() => setVideoModalKey(undefined)} />
             <YoutubePlayer
@@ -79,17 +81,11 @@ const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
                 />
               </Center>
               <VStack ml={5} justifyContent="space-between" flex={1}>
-                <Text
-                  color={'gray.900'}
-                  fontFamily="heading"
-                  fontSize={'sm'}
-                  lineHeight={'xs'}
-                  numberOfLines={2}
-                >
+                <Text fontFamily="heading" fontSize={'sm'} lineHeight={'xs'} numberOfLines={2}>
                   {video.name}
                 </Text>
                 <HStack justifyContent={'space-between'} w="full" alignItems={'center'}>
-                  <Text color={'gray.700'} fontFamily="body" fontSize={'sm'}>
+                  <Text fontFamily="body" fontSize={'sm'}>
                     {DateTime.fromISO(video.published_at).toFormat('dd/LL/yyyy')}
                   </Text>
                   {video.official && (
@@ -112,7 +108,7 @@ const Trailers = ({ movie }: { movie: MoviePropsExtended }) => {
         ))
       ) : (
         <Center flexGrow={1}>
-          <Text color={'gray.900'} fontSize={'md'} fontFamily={'heading'}>
+          <Text fontSize={'md'} fontFamily={'heading'}>
             There are no related videos
           </Text>
         </Center>

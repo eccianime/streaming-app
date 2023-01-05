@@ -9,6 +9,7 @@ import {
   Language,
   PrivacyPolicy,
   HelpCenter,
+  EditProfile,
 } from '../screens/Profile';
 
 import { ProfileNavigationParams } from '../types/navigation';
@@ -27,6 +28,7 @@ const Profile = () => {
       }}
     >
       <Screen name="Option List" component={OptionList} />
+      <Screen name="Edit Profile" component={EditProfile} />
       <Screen name="Notification" component={Notification} />
       <Screen name="Download" component={Download} />
       <Screen name="Security" component={Security} />
