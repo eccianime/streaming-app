@@ -6,7 +6,9 @@
     "start": "npx expo start",
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
-    "web": "npx expo start --web"
+    "web": "npx expo start --web",
+    "ts": "npx tsc --watch",
+    "lint": "npx eslint --ext .tsx,.ts src/"
   },
   "dependencies": {
     "@expo-google-fonts/urbanist": "^0.2.2",

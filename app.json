@@ -14,7 +14,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false
     },
@@ -22,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.ingjeanpaulrojas.streaming_app"
     },
     "web": {
       "favicon": "./src/assets/images/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "62bf28e5-7f8f-45b4-9b8b-dd12dfa5fc3e"
+      }
     }
   }
 }
