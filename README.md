@@ -6,7 +6,7 @@ For this test, I created movie trailers app. In here you can see all the trailer
 
 Just clone the repo with
 
-    git clone https://github.com/eccianime/streaming_app.git
+    git clone https://github.com/eccianime/streaming-app.git
 
 and install with
 
@@ -20,7 +20,7 @@ or
 
 Go to the folder with
 
-    cd streaming_app
+    cd streaming-app
 
 and run
 
@@ -34,4 +34,4 @@ or
 
 The result should be as seen in the next video, hope you like it.
 
-![Demo](https://github.com/eccianime/streaming_app/blob/master/src/assets/demo.gif)
+![Demo](https://github.com/eccianime/streaming-app/blob/master/src/assets/demo.gif)
