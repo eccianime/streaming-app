@@ -2,7 +2,7 @@
   "expo": {
     "name": "streaming_app",
     "slug": "streaming_app",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "userInterfaceStyle": "light",
@@ -23,7 +23,8 @@
         "foregroundImage": "./src/assets/images/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.ingjeanpaulrojas.streaming_app"
+      "package": "com.ingjeanpaulrojas.streaming_app",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./src/assets/images/icon.png"
